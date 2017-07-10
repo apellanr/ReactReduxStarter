@@ -10,6 +10,7 @@ class Searchbar extends Component {
         this.state = { term: '' };
 
         this.onInputChange = this.onInputChange.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
     onInputChange(event) {
@@ -20,6 +21,10 @@ class Searchbar extends Component {
         event.preventDefault();
 
         // we need to go and fetch weather data
+        // will select term inputted and call the API
+        // setState will clear term in input field
+        this.props.fetchWeather(this.state.term);
+        this.setState({ term: '' });
     }
 
     render() {
@@ -39,8 +44,15 @@ class Searchbar extends Component {
     }
 }
 
+// by bindingActionCreators fetchWeather to dispatch and 
+// mappingDispatchToProps it gives us access to the function 
+// this.props.fetchWeather inside component 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ fetchWeather }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(Searchbar);
+
+// reason for null in first param is whenever you are passing in a function
+// that is supposed to matchDispatchToProps to container, it always
+// goes in as the second argument 
