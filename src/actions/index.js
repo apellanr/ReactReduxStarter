@@ -16,3 +16,7 @@ export function fetchWeather(city) {
         payload: request // returning the promise as the payload
     };
 }
+
+// redux promise is a middleware
+// middlewares have the ability to stop or manipulate actions 
+// before they hit any reducers whatsoever
